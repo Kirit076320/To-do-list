@@ -1,0 +1,46 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 95vh;
+    font-family: sans-serif;
+    background-size: cover;
+    padding: 60px;
+}
+
+/* Fixation de la navbar en haut de la page */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Style du logo */
+.navbar-brand img {
+    height: 70px;
+    width: auto;
+}
+
+/* Style des liens transformés en boutons */
+.navbar a.btn {
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 5px 20px;
+    font-size: 18px;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
+}
+
+/* Changer la couleur des boutons au survol */
+.navbar a.btn:hover {
+    opacity: 0.8;
+}
+
+/* S'assurer que les boutons sont bien alignés à droite */
+.navbar-nav.ml-auto {
+    margin-left: auto;
+}
