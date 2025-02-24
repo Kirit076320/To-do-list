@@ -17,6 +17,7 @@ body{
     z-index: 1000;
     width: 100%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 70%;
 }
 
 /* Style du logo */
@@ -33,14 +34,155 @@ body{
     font-size: 18px;
     margin: 0 10px;
     transition: background-color 0.3s ease;
+    color: #fff;
 }
 
 /* Changer la couleur des boutons au survol */
 .navbar a.btn:hover {
-    opacity: 0.8;
+    border: solid 3px #000;
 }
 
 /* S'assurer que les boutons sont bien alignés à droite */
 .navbar-nav.ml-auto {
     margin-left: auto;
+}
+
+/******************** page inscription **************************/
+
+
+.inscription_body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: sans-serif;
+    background-image: url("https://i.pathehome.com/product/global/phf-be640jazz7/754f19-fast-furioustokyodrift_b_fr.jpg?auto=format,compress");
+    background-size: cover;
+    overflow: hidden;
+}
+.inscription-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    opacity: 90%;
+}
+
+.inscription-form {
+    position: relative;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.75);
+    width: 100%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin-top: 100px;
+}
+
+.inscription-form h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-family: "Bangers", sans-serif;
+    color: #ffffff;
+}
+
+.input-box {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    border: none;
+    background: transparent;
+    outline: none;
+    border-bottom: 2px solid #fff;
+}
+
+.input-box span {
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    color: #fff;
+    font-size: 16px;
+    transition: 0.3s;
+    pointer-events: none;
+    font-family: "Fjalla One", serif;
+}
+
+.input-box input:focus ~ span,
+.input-box input:valid ~ span {
+    transform: translateY(-30px);
+    color: #ff6347;
+    font-size: 14px;
+}
+
+.input-box i {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #4ec733, transparent);
+    transition: 0.4s;
+}
+
+.input-box input:focus ~ i {
+    width: 100%;
+}
+
+.inscription-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #DB5A6B, #b3bcff);
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.inscription-btn:hover {
+    background: linear-gradient(135deg, #85916d, #b3f8ff);
+    color: #000
+}
+
+/* Positionner l'alerte en bas du formulaire */
+.inscription-form {
+    position: relative;
+}
+
+/* Conteneur des messages */
+.inscription-messages {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Message d'erreur en rouge */
+.inscription-error {
+    color: #d9534f; /* Rouge Bootstrap */
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    width: 80%;
+    margin: 20px;
+}
+
+/* Message de succès en vert */
+.inscription-success {
+    color: #28a745; /* Vert Bootstrap */
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    width: 80%;
+    margin: 0 auto;
 }
