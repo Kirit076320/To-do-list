@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>To-do list</title>
+    <title>Inscription</title>
 
     <!-- lien bootstrap -->
 
