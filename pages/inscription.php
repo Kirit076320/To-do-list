@@ -17,23 +17,24 @@
 <body class="inscription_body">
 
 <nav class="navbar navbar-expand-lg" style="background-color: #fcc9b9;">
-    <!-- Logo avec lien vers l'accueil -->
-    <a class="navbar-brand" href="../index.html">
-        <img src="../assets/img/japan_list.png" alt="Logo">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <!-- Les boutons à droite (Inscription et Connexion) -->
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a href="inscription.php" class="btn btn-inscription" role="button" style="background-color: #DB5A6B;">Inscription</a>
-            </li>
-            <li class="nav-item">
-                <a href="connexion.php" class="btn btn-connexion" role="button" style="background-color: #b3bcff;">Connexion</a>
-            </li>
-        </ul>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">
+            <img src="../assets/img/japan_list.png" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a href="inscription.php" class="btn btn-inscription" role="button" style="background-color: #DB5A6B;">Inscription</a>
+                </li>
+                <li class="nav-item">
+                    <a href="connexion.php" class="btn btn-connexion" role="button" style="background-color: #b3bcff;">Connexion</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 
@@ -84,13 +85,6 @@
 <!-- Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-        // Code pour afficher ou masquer le menu burger
-        $('.navbar-toggler').click(function() {
-            $('#navbarNav').toggleClass('collapse');
-        });
-    });
-</script>
+
 </body>
 </html>
