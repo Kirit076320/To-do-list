@@ -49,7 +49,7 @@
 
 
 <div class="container-fluid custom-container" style="margin-top: 3rem">
-    <div class="row" id="task-container">
+    <div class="row justify-content-center" id="task-container">
         <!-- Les tâches seront chargées ici dynamiquement -->
     </div>
 </div>

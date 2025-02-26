@@ -4,34 +4,41 @@ $(document).ready(function () {
 
 function loadLists() {
     $.ajax({
-        url: "../assets/sql/get_tasks.php", // Assurez-vous que le chemin est correct
+        url: "../assets/sql/get_tasks.php",
         type: "GET",
         dataType: "json",
         success: function (data) {
-            console.log("Données reçues :", data); // Debugging
+            console.log("Données reçues :", data); // 🔥 Debugging
 
-            if (!Array.isArray(data)) {
-                console.error("Les données reçues ne sont pas un tableau !");
+            if (!Array.isArray(data) || data.length === 0) {
+                console.error("Aucune liste trouvée !");
+                $("#list-container").html("<p>Aucune liste trouvée.</p>");
                 return;
             }
 
-            let container = $("#list-container");
-            container.empty(); // Vider le conteneur avant d'ajouter les nouvelles données
+            let container = $("#task-container");
+            container.empty(); // Vider l'affichage avant d'ajouter les nouvelles données
 
             data.forEach(list => {
                 let listHTML = `
-                    <div class="card custom-card">
+                    <div class="card custom-card" style="border-left: 5px solid ${list.color}; margin-bottom: 15px;">
                         <div class="card-body custom-card-body">
                             <h5 class="card-title text-center custom-card-title">${list.list_name}</h5>
-                            <ul class="task-list">`;
+                            <ul class="task-list" id="task-list-${list.list_id}">`;
 
-                list.tasks.forEach(task => {
-                    listHTML += `
-                        <li>
-                            <strong>${task.task_name}</strong> - ${task.status} 
-                            (Priorité: ${task.priority}, Date limite: ${task.due_date})
-                        </li>`;
-                });
+                // Vérifie si la liste a des tâches avant de les afficher
+                if (Array.isArray(list.tasks) && list.tasks.length > 0) {
+                    list.tasks.forEach(task => {
+                        listHTML += `
+                            <li>
+                                <strong>${task.task_name}</strong> - ${task.status} <br>
+                                <small>${task.description}</small> <br>
+                                <span>Priorité: ${task.priority}, Date limite: ${task.due_date}</span>
+                            </li>`;
+                    });
+                } else {
+                    listHTML += `<li>Aucune tâche pour cette liste.</li>`;
+                }
 
                 listHTML += `</ul></div></div>`;
                 container.append(listHTML);
