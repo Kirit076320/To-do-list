@@ -1,46 +1,59 @@
 <?php
 session_start();
-include('db.php');
+$pdo = new PDO('mysql:host=localhost;dbname=to-do-list;charset=utf8', 'root', '');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'];
+// Vérification du formulaire
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Vérification de l'existence de l'utilisateur
-    $sql = "SELECT * FROM users WHERE email = :email";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':email', $email);
-    $stmt->execute();
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->execute([$username]);
+    $user = $stmt->fetch();
 
-    // Si l'utilisateur est trouvé dans la base de données
-    if ($stmt->rowCount() > 0) {
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Vérification du mot de passe
-        if (password_verify($password, $user['password'])) {
-            // Connexion réussie, création de la session utilisateur
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['email'] = $user['email'];
-            header("Location: dashboard.php");  // Rediriger vers le tableau de bord ou la page principale
-            exit;
-        } else {
-            // Mot de passe incorrect
-            $error = "Mot de passe incorrect.";
+    if ($user && password_verify($password, $user['password'])) {
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['role'] = $user['role']; // 'admin' ou 'user'
+        if ($_SESSION['role'] == 'admin') {
+            echo "<script>alert('Bienvenue $username')</script>";
+            header("Refresh:1; url=/index.php");
+        } elseif ($_SESSION['role'] == 'user') {
+            echo "<script>alert('Bienvenue $username')</script>";
+            header("Refresh:1; url=/index.php");
         }
+        exit();
     } else {
-        // Utilisateur non trouvé
-        $error = "Aucun utilisateur trouvé avec cet email.";
+        echo "Identifiants incorrects !";
+        header("Refresh:0.5; url=login.php");
     }
 }
 ?>
-
-<?php if (isset($error)): ?>
-    <div class="error"><?= htmlspecialchars($error); ?></div>
-<?php endif; ?>
-
-<form method="POST">
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Mot de passe" required>
-    <button type="submit">Se connecter</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Se connecter</title>
+    <link rel="stylesheet" href="/assets/style.css"
+</head>
+<body class="login">
+<div class="topnav">
+    <a class="active" href="/index.php">Accueil</a>
+    <a href="/php/register.php">S'enregistrer</a>
+    <a href="/php/login.php">Se connecter</a>
+</div>
+<div class="tout-wrapper">
+    <div class="wrapper">
+        <form method="POST" class="form">
+            <div class="container">
+                <h1 class="login_title">Se connecter</h1>
+                <input class="input-box" type="text" name="username" placeholder="Nom d'utilisateur" required>
+                <input class="input-box" type="password" name="password" placeholder="Mot de passe" required>
+                <button class="login_submit btn" type="submit">Se connecter</button>
+                <div class="register-link">
+                    <p>Pas de compte ? <a href="../php/register.php">S'enregistrer</a></p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

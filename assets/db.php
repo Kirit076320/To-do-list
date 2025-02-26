@@ -1,6 +1,9 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 $host = 'localhost';      // Hôte de la base de données
-$dbname = 'to-do-list';    // Nom de la base de données
+$dbname = 'to-do-list';   // Nom de la base de données
 $username = 'root';       // Nom d'utilisateur de la base de données
 $password = '';           // Mot de passe de la base de données (vide si vous n'en avez pas)
 
