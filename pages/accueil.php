@@ -49,70 +49,13 @@
 
 
 <div class="container-fluid custom-container" style="margin-top: 3rem">
-    <div class="row">
-        <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center">
-            <div class="card custom-card">
-                <div class="card-body custom-card-body">
-                    <h5 class="card-title text-center custom-card-title">To-do List</h5>
-                    <p class="text-muted custom-text-muted">Task Name: Task 1</p>
-                    <p class="text-muted custom-text-muted">Description: Task description.</p>
-                    <p class="text-muted custom-text-muted">Status: In Progress</p>
-                    <p class="text-muted custom-text-muted">Priority: High</p>
-                    <p class="text-muted custom-text-muted">Due Date: 2025-03-10</p>
-                    <p class="text-muted custom-text-muted">Created At: 2025-02-25</p>
-                    <a href="pages/inscription.php" class="btn btn-primary custom-btn">Voir la to-do list</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center">
-            <div class="card custom-card">
-                <div class="card-body custom-card-body">
-                    <h5 class="card-title text-center custom-card-title">To-do List</h5>
-                    <p class="text-muted custom-text-muted">Task Name: Task 2</p>
-                    <p class="text-muted custom-text-muted">Description: Task description.</p>
-                    <p class="text-muted custom-text-muted">Status: Completed</p>
-                    <p class="text-muted custom-text-muted">Priority: Medium</p>
-                    <p class="text-muted custom-text-muted">Due Date: 2025-03-15</p>
-                    <p class="text-muted custom-text-muted">Created At: 2025-02-26</p>
-                    <a href="pages/inscription.php" class="btn btn-primary custom-btn">Voir la to-do list</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center">
-            <div class="card custom-card">
-                <div class="card-body custom-card-body">
-                    <h5 class="card-title text-center custom-card-title">To-do List</h5>
-                    <p class="text-muted custom-text-muted">Task Name: Task 3</p>
-                    <p class="text-muted custom-text-muted">Description: Task description.</p>
-                    <p class="text-muted custom-text-muted">Status: Pending</p>
-                    <p class="text-muted custom-text-muted">Priority: Low</p>
-                    <p class="text-muted custom-text-muted">Due Date: 2025-03-20</p>
-                    <p class="text-muted custom-text-muted">Created At: 2025-02-27</p>
-                    <a href="pages/inscription.php" class="btn btn-primary custom-btn">Voir la to-do list</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center">
-            <div class="card custom-card">
-                <div class="card-body custom-card-body">
-                    <h5 class="card-title text-center custom-card-title">bonjour</h5>
-                    <p class="text-muted custom-text-muted">Task Name: Task 4</p>
-                    <p class="text-muted custom-text-muted">Description: Task description.</p>
-                    <p class="text-muted custom-text-muted">Status: In Progress</p>
-                    <p class="text-muted custom-text-muted">Priority: High</p>
-                    <p class="text-muted custom-text-muted">Due Date: 2025-03-25</p>
-                    <p class="text-muted custom-text-muted">Created At: 2025-02-28</p>
-                    <a href="pages/inscription.php" class="btn btn-primary custom-btn">Voir la to-do list</a>
-                </div>
-            </div>
-        </div>
+    <div class="row" id="task-container">
+        <!-- Les tâches seront chargées ici dynamiquement -->
     </div>
 </div>
 
 
+<!-- Inclusion de jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- Popper.js -->
@@ -120,6 +63,8 @@
 
 <!-- Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="../assets/js/get_tasks.js"></script>
 
 <script>
     document.getElementById("searchInput").addEventListener("input", function () {
