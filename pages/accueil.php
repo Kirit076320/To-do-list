@@ -29,10 +29,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a href="inscription.php" class="btn btn-inscription" role="button" style="background-color: #DB5A6B;">Inscription</a>
+                    <a href="favoris.php" class="btn btn-inscription" role="button" style="background-color: #DB5A6B;">❤️ Favoris ❤️</a>
                 </li>
                 <li class="nav-item">
-                    <a href="connexion.php" class="btn btn-connexion" role="button" style="background-color: #b3bcff;">Connexion</a>
+                    <a href="connexion.php" class="btn btn-connexion" role="button" style="background-color: #b3bcff;">Déconnexion</a>
                 </li>
             </ul>
         </div>
