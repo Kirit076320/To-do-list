@@ -4,21 +4,21 @@ $pdo = new PDO('mysql:host=localhost;dbname=to-do-list;charset=utf8', 'root', ''
 
 // Vérification du formulaire
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $username = $_POST['username'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
-    $stmt->execute([$username]);
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->execute([$email]);
     $user = $stmt->fetch();
 
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['role'] = $user['role']; // 'admin' ou 'user'
         if ($_SESSION['role'] == 'admin') {
-            echo "<script>alert('Bienvenue $username')</script>";
+            echo "<script>alert('Bienvenue $email')</script>";
             header("Refresh:1; url=/index.php");
         } elseif ($_SESSION['role'] == 'user') {
-            echo "<script>alert('Bienvenue $username')</script>";
+            echo "<script>alert('Bienvenue $email')</script>";
             header("Refresh:1; url=/index.php");
         }
         exit();
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -56,4 +56,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
         </form>
     </div>
-</div>
+</div>-->

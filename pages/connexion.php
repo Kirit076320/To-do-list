@@ -36,46 +36,23 @@
 
 <div class="login-container">
 
-    <!-- Affichage du message d'erreur de connexion -->
-    <?php if (isset($_SESSION['loginMessage'])) : ?>
-        <div class="auth-error-message">
-            <h4>
-                <?= $_SESSION['loginMessage']; ?>
-            </h4>
-        </div>
-        <?php
-        unset($_SESSION['loginMessage']); // Supprime le message après affichage
-        unset($_SESSION['email_temp']); // Supprime l'email temporaire après affichage
-        ?>
-    <?php endif; ?>
-
     <form class="login-form" method="POST" action="../assets/sql/login.php">
         <h1>Connexion</h1>
         <div class="input-box">
-            <input type="text" name="email" required value="<?= isset($_SESSION['email_temp']) ? htmlspecialchars($_SESSION['email_temp']) : '' ?>">
+            <input type="text" name="email" required ">
             <span style="color:white;">E-mail</span>
             <i></i>
         </div>
         <div class="input-box">
-            <input type="password" name="mdp" required>
+            <input type="password" name="password" required>
             <span style="color:white;">Mot de passe</span>
             <i></i>
         </div>
-        <button type="submit" name="ok" class="login-btn">Connexion</button>
+        <button type="submit" name="ok" class="login-btn">Se connecter</button>
         <br><br>
         <p><a href="mdp_oublier.php" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Mot de passe oublié ?</a></p>
         <p><a href="inscription.php" class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">S'inscrire ici.</a></p>
 
-        <!-- Affichage du message d'erreur -->
-        <?php if (!empty($_SESSION['loginMessage'])) : ?>
-            <h4 style="background-color:red; color:white; font-size:15px; padding:10px;">
-                <?= $_SESSION['loginMessage']; ?>
-            </h4>
-            <?php
-            unset($_SESSION['loginMessage']); // Supprime le message après l'affichage
-            unset($_SESSION['email_temp']); // Supprime l'email temporaire après affichage
-            ?>
-        <?php endif; ?>
     </form>
 </div>
 
