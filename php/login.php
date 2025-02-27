@@ -16,10 +16,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['role'] = $user['role']; // 'admin' ou 'user'
         if ($_SESSION['role'] == 'admin') {
             echo "<script>alert('Bienvenue $email')</script>";
-            header("Refresh:1; url=index.php");
+            header("Refresh:1; url=/index.php");
         } elseif ($_SESSION['role'] == 'user') {
             echo "<script>alert('Bienvenue $email')</script>";
-            header("Refresh:1; url=index.php");
+            header("Refresh:1; url=/index.php");
         }
         exit();
     } else {

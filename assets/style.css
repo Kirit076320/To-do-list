@@ -50,7 +50,6 @@
     background-size: cover;
     background-position: center;
     padding: 20px;
-    overflow: hidden;
 }
 
 /* Centrer le contenu verticalement et horizontalement */
@@ -91,21 +90,6 @@
 
 .hero-btn:hover {
     background-color: #b43f53;
-}
-
-/********************************** page accueil ****************************************/
-
-/* 🌍 Styles généraux */
-.accueil_body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    font-family: sans-serif;
-    background-image: url("https://res.cloudinary.com/enchanting/q_70,f_auto,c_fill,g_face/hj-web/2020/12/kawaguchiko-lake-near-mt-fuji-in-japan-min-e1661391955973.jpg");
-    background-size: cover;
-    background-position: center;
-    padding: 20px;
 }
 
 /* 🃏 Style des cartes */
