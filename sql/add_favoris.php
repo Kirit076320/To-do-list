@@ -10,11 +10,16 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $task_id = $_GET['task_id'];
 
-// Supprimer la citation des favoris
-$stmt = $pdo->prepare("DELETE FROM favorites WHERE user_id = ? AND task_id = ?");
+// Vérifier si la citation est déjà en favoris
+$stmt = $pdo->prepare("SELECT * FROM favorites WHERE user_id = ? AND task_id = ?");
 $stmt->execute([$user_id, $task_id]);
+
+if ($stmt->rowCount() === 0) {
+    // Ajouter la citation aux favoris
+    $stmt = $pdo->prepare("INSERT INTO favorites (user_id, task_id) VALUES (?, ?)");
+    $stmt->execute([$user_id, $task_id]);
+}
 
 header("Location: ../index.php");
 exit();
 ?>
-<?php
