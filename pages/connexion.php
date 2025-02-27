@@ -36,7 +36,7 @@
 
 <div class="login-container">
 
-    <form class="login-form" method="POST" action="../assets/sql/login.php">
+    <form class="login-form" method="POST" action="../php/login.php">
         <h1>Connexion</h1>
         <div class="input-box">
             <input type="text" name="email" required ">

@@ -6,12 +6,13 @@ $pdo = new PDO('mysql:host=localhost;dbname=to-do-list;charset=utf8', 'root', ''
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Récupération des données du formulaire
     $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
     $password = $_POST['password'];
-    $password_confirm = $_POST['password_confirm'] ?? '';  // Si "password_confirm" n'est pas défini, on assigne une valeur vide
+    $password_confirm = $_POST['password_confirm'] ?? '';
 
     // Vérifier que les mots de passe correspondent
     if ($password !== $password_confirm) {
-        echo "Les mots de passe ne correspondent pas. <a href=\"register.php\">Retour</a>";
+        echo "Les mots de passe ne correspondent pas. <a href=\"../php/register.php\">Retour</a>";
         exit();
     }
 
@@ -19,29 +20,38 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt = $pdo->prepare("SELECT user_id FROM users WHERE username = ?");
     $stmt->execute([$username]);
     if ($stmt->fetch()) {
-        echo "Ce nom d'utilisateur est déjà pris. <a href=\"register.php\">Retour</a>";
+        echo "Ce nom d'utilisateur est déjà pris. <a href=\"../php/register.php\">Retour</a>";
+        exit();
+    }
+
+    // Vérifier si l'email est déjà utilisé
+    $stmt = $pdo->prepare("SELECT user_id FROM users WHERE email = ?");
+    $stmt->execute([$email]);
+    if ($stmt->fetch()) {
+        echo "Cet email est déjà utilisé. <a href=\"../php/register.php\">Retour</a>";
         exit();
     }
 
     // Hasher le mot de passe
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
-    // Insérer l'utilisateur sans la colonne 'role' (enlevant 'role')
-    $stmt = $pdo->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
-    $stmt->execute([$username, $hashed_password]);
+    // Insérer l'utilisateur avec l'email
+    $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+    $stmt->execute([$username, $email, $hashed_password]);
 
     // Authentifier l'utilisateur immédiatement après l'inscription
-    $_SESSION['user_id'] = $pdo->lastInsertId(); // Récupérer l'ID de l'utilisateur nouvellement inscrit
+    $_SESSION['user_id'] = $pdo->lastInsertId();
     $_SESSION['username'] = $username;
-    $_SESSION['last_activity'] = time(); // Ajouter un timestamp de la dernière activité
+    $_SESSION['email'] = $email;
+    $_SESSION['last_activity'] = time();
 
-    header("Location: ../index.php"); // Rediriger vers l'accueil après l'inscription
+    header("Location: ../index.php");
     exit();
 }
 ?>
 
 
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -70,4 +80,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </div>
 </div>
 </body>
-</html>
+</html>-->

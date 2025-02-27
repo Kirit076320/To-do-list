@@ -55,21 +55,21 @@
         }
         ?>
 
-        <form action="../assets/sql/inscrip.php" method="POST">
+        <form action="../php/register.php" method="POST">
             <div class="input-box">
                 <input type="email" name="email" id="email" required>
                 <span>Email</span>
             </div>
             <div class="input-box">
-                <input type="text" name="nom" id="username" required>
+                <input type="text" name="username" id="username" required>
                 <span>Username</span>
             </div>
             <div class="input-box">
-                <input type="password" name="mdp" id="mdp" minlength="8" required>
+                <input type="password" name="password" id="mdp" minlength="8" required>
                 <span>Mot de passe</span>
             </div>
             <div class="input-box">
-                <input type="password" name="mdp_confirm" id="mdp_confirm" minlength="8" required>
+                <input type="password" name="password_confirm" id="mdp_confirm" minlength="8" required>
                 <span>Confirmer le mot de passe</span>
             </div>
             <button type="submit" class="inscription-btn" name="ok">S'inscrire</button>
