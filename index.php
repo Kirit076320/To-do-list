@@ -23,6 +23,12 @@ if (isset($_SESSION['user_id'])) {
 </head>
 <body>
 
+<div class="container-fluid custom-container" style="margin-top: 3rem">
+    <div class="row justify-content-center" id="task-container">
+        <!-- Les tâches seront chargées ici dynamiquement -->
+    </div>
+</div>
+
 <?php if (isset($_SESSION['user_id'])): ?>
     <div class="todo-section">
         <h1>Vos To-Do Lists</h1>
@@ -57,7 +63,7 @@ if (isset($_SESSION['user_id'])) {
 
         <!-- Formulaire pour créer une nouvelle To-Do List -->
         <h2>Créer une nouvelle To-Do List</h2>
-        <form action="/assets/create_todo.php" method="POST">
+        <form action="sql/create_todo.php" method="POST">
             <input type="text" name="list_name" placeholder="Nom de la liste" required>
             <button type="submit">Créer</button>
         </form>
@@ -86,5 +92,7 @@ if (isset($_SESSION['user_id'])) {
     });
 </script>
 
+
+<script src="assets/js/get_tasks.js"></script>
 </body>
 </html>

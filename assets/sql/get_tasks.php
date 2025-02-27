@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 $host = "localhost";
-$dbname = "to-do_list";
+$dbname = "to-do-list";
 $username = "root";
 $password = "";
 
