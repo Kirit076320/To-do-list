@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 require_once(__DIR__ . '/bd.php');
@@ -24,10 +25,6 @@ if (!$list) {
 $stmt = $pdo->prepare("SELECT * FROM tasks WHERE list_id = ? ORDER BY task_id ASC");
 $stmt->execute([$list_id]);
 $tasks = $stmt->fetchAll();
-
-$stmt = $pdo->prepare("SELECT * FROM lists WHERE parent_list_id = ?");
-$stmt->execute([$list_id]);
-$sublists = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -38,194 +35,132 @@ $sublists = $stmt->fetchAll();
     <link rel="stylesheet" href="/assets/style.css">
     <script src="../assets/js/dragdrop.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
         }
-
-        .task-item {
-            cursor: move;
-            padding: 10px;
-            margin-bottom: 8px;
-            background: white;
-            border-radius: 5px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .task-item.dragging {
-            opacity: 0.5;
-            transform: scale(1.02);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .drag-handle {
-            cursor: grab;
-            padding: 8px;
-            font-size: 18px;
-            color: #666;
-        }
-
-        .task-list {
-            padding: 15px;
-            background: #f8f8f8;
+        .card {
+            background: #fff;
             border-radius: 8px;
-            min-height: 50px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: transform 0.2s ease;
         }
-
+        .card:hover {
+            transform: none; /* Désactive le hover */
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .task-description {
+            font-size: 14px;
+            color: #555;
+            margin-top: 5px;
+        }
+        .task-info {
+            font-size: 13px;
+            color: #777;
+            margin-top: 5px;
+        }
+        .task-actions {
+            margin-top: 10px;
+        }
         .task-actions button {
-            background: none;
-            border: none;
-            color: #007BFF;
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        .task-actions button:hover {
-            text-decoration: underline;
-        }
-
-        .add-task-form, .add-sublist-form {
-            margin-top: 15px;
-        }
-
-        .add-task-form input,
-        .add-task-form textarea,
-        .add-sublist-form input {
-            display: block;
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .add-task-form button, .add-sublist-form button {
-            background: #28a745;
+            background: #007bff;
             color: white;
             border: none;
-            padding: 10px;
+            padding: 5px 10px;
             border-radius: 4px;
             cursor: pointer;
         }
-
-        .add-task-form button:hover, .add-sublist-form button:hover {
-            background: #218838;
+        .task-actions button.delete-task {
+            background: #dc3545;
         }
     </style>
 </head>
 <body>
 
-<h1><?= htmlspecialchars($list['list_name']); ?></h1>
-<a href="../index.php">Retour aux listes</a>
+<div class="container">
+    <h1><?= htmlspecialchars($list['list_name']); ?></h1>
+    <a href="../index.php">Retour aux listes</a>
 
-<div class="task-container">
     <div id="tasks-section">
-        <ul class="task-list" data-list-id="<?= $list_id ?>">
-            <?php foreach ($tasks as $task): ?>
-                <li class="task-item"
-                    draggable="true"
-                    data-task-id="<?= $task['task_id']; ?>"
-                    data-list-id="<?= $list_id; ?>"
-                    style="background-color: <?= htmlspecialchars($task['color']); ?>;">
-                    <div class="drag-handle">☰</div>
-                    <span class="task-name"><?= htmlspecialchars($task['task_name']); ?></span>
-                    <div class="task-actions">
-                        <button class="edit-task" data-task-id="<?= $task['task_id']; ?>">✏️</button>
-                        <button class="delete-task" data-task-id="<?= $task['task_id']; ?>">❌</button>
-                    </div>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+        <?php foreach ($tasks as $task): ?>
+            <div class="card" style="background-color: <?= htmlspecialchars($task['color']); ?>;">
+                <div class="card-title"><?= htmlspecialchars($task['task_name']); ?></div>
+                <?php if (!empty($task['description'])): ?>
+                    <div class="task-description"><?= nl2br(htmlspecialchars($task['description'])); ?></div>
+                <?php endif; ?>
+                <div class="task-info">
+                    Statut: <strong><?= isset($task['status']) ? htmlspecialchars($task['status']) : 'Non défini'; ?></strong><br>
+                    Priorité: <strong><?= isset($task['priority']) ? htmlspecialchars($task['priority']) : 'Non définie'; ?></strong><br>
+                    Date limite: <strong><?= isset($task['due_date']) ? htmlspecialchars($task['due_date']) : 'Non définie'; ?></strong>
+                </div>
+                <div class="task-actions">
+                    <a href="update_task.php?task_id=<?= $task['task_id']; ?>" class="btn btn-primary">Modifier</a>
+                    <button class="btn btn-danger delete-task" data-task-id="<?= $task['task_id']; ?>">Supprimer</button>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
 
     <!-- Formulaire pour ajouter une tâche -->
-    <form class="add-task-form" method="POST" action="add_task.php">
+    <form id="add-task-form" method="POST" action="add_task.php">
         <input type="hidden" name="list_id" value="<?= $list_id ?>">
         <input type="text" name="task_name" placeholder="Nom de la tâche" required>
         <textarea name="description" placeholder="Description (optionnelle)"></textarea>
         <input type="color" name="color" value="#ffffff">
         <button type="submit">Ajouter la tâche</button>
     </form>
-
-    <!-- Formulaire pour ajouter une sous-liste -->
-    <form class="add-sublist-form" method="POST" action="sublist.php">
-        <input type="hidden" name="parent_list_id" value="<?= $list_id ?>">
-        <input type="text" name="sublist_name" placeholder="Nom de la sous-liste" required>
-        <button type="submit">Ajouter une sous-liste</button>
-    </form>
-
-    <!-- Sous-listes -->
-    <div id="sublists-section">
-        <?php if ($sublists): ?>
-            <h2>Sous-listes</h2>
-            <ul>
-                <?php foreach ($sublists as $sublist): ?>
-                    <li>
-                        <a href="?list_id=<?= $sublist['list_id']; ?>">
-                            <?= htmlspecialchars($sublist['list_name']); ?>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        <?php endif; ?>
-    </div>
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        let draggingElement = null;
-
-        function initDragAndDrop() {
-            document.querySelectorAll('.task-item').forEach(task => {
-                task.addEventListener('dragstart', handleDragStart);
-                task.addEventListener('dragend', handleDragEnd);
-                task.addEventListener('dragover', handleDragOver);
-                task.addEventListener('drop', handleDrop);
-            });
-        }
-
-        function handleDragStart(e) {
-            draggingElement = e.target;
-            e.target.classList.add('dragging');
-        }
-
-        function handleDragEnd(e) {
-            e.target.classList.remove('dragging');
-            draggingElement = null;
-        }
-
-        function handleDragOver(e) {
-            e.preventDefault();
-        }
-
-        function handleDrop(e) {
-            e.preventDefault();
-            if (draggingElement && e.target.classList.contains('task-item')) {
-                e.target.parentNode.insertBefore(draggingElement, e.target);
-            }
-        }
-
-        initDragAndDrop();
-
-        document.querySelectorAll('.delete-task').forEach(button => {
+        document.querySelectorAll('.edit-task').forEach(button => {
             button.addEventListener('click', function(e) {
                 const taskId = e.target.dataset.taskId;
-                if (confirm('Supprimer cette tâche ?')) {
-                    fetch('delete_task.php', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ task_id: taskId })
-                    })
-                        .then(response => response.json())
-                        .then(() => location.reload());
-                }
+                openEditTaskForm(taskId);
             });
         });
-    });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".delete-task").forEach(button => {
+                button.addEventListener("click", function() {
+                    const taskId = this.getAttribute("data-task-id");
+
+                    if (confirm("Voulez-vous vraiment supprimer cette tâche ?")) {
+                        fetch("../sql/delete_task.php", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ task_id: taskId })
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    alert("Tâche supprimée !");
+                                    location.reload();
+                                } else {
+                                    alert("Erreur : " + data.message);
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Erreur :", error);
+                            });
+                    }
+                });
+            });
+        });
 </script>
+
 
 </body>
 </html>
+
+
+
+
+
+
