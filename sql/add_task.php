@@ -5,13 +5,6 @@ ini_set('display_errors', 1);
 session_start();
 $pdo = new PDO('mysql:host=localhost;dbname=to-do-list;charset=utf8', 'root', '');
 
-//Vérifier si list_id est défini dans la session
-if (!isset($_SESSION['list_id'])) {
-    echo "Erreur : list_id n'est pas défini dans la session.";
-    exit;
-}
-$list_id = $_SESSION['list_id'];
-
 // Afficher le list_id pour le débogage
 echo "List ID récupéré de la session : " . htmlspecialchars($list_id) . "<br>";
 
