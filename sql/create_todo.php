@@ -12,11 +12,11 @@ $stmt = $pdo->prepare("
     VALUES (:user_id, :list_name, :color, NOW(), NOW())
 ");
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['list_name'])) {
-$list_name = trim($_POST['list_name']);
-if (empty($list_name)) {
-    die("Erreur : Le nom de la liste ne peut pas être vide.");
+    $list_name = trim($_POST['list_name']);
+    if (empty($list_name)) {
+        die("Erreur : Le nom de la liste ne peut pas être vide.");
+    }
 }
-
 $title = "To-Do List :" . $list_name;
 $color = "#ffffff";
 
