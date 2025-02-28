@@ -16,7 +16,7 @@ Public cible : Tout le monde
 2.4Drag an drop dans les autres états
 2.5Mise en favoris des éléments importants (prioritaires)
 2.6Filtres par liste des éléments (via des couleurs (par importance))
-
+2.7Partage de la to do list en lecture seul 
 3. Languages :
 
    Frontend : HTML/CSS/JS
