@@ -22,12 +22,10 @@ if (!$list) {
     die("Erreur : Liste introuvable ou non autorisée.");
 }
 
-// Récupérer les tâches de cette liste
-$stmt = $pdo->prepare("SELECT * FROM tasks WHERE list_id = ? ORDER BY color ASC");
+$stmt = $pdo->prepare("SELECT * FROM tasks WHERE list_id = ? ");
 $stmt->execute([$list_id]);
 $tasks = $stmt->fetchAll();
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -40,7 +38,7 @@ $tasks = $stmt->fetchAll();
 <body>
 
 <h1><?= htmlspecialchars($list['list_name']); ?></h1>
-<a href="index.php">Retour aux listes</a>
+<a href="../index.php">Retour aux listes</a>
 
 <div class="task-container">
     <?php if ($tasks): ?>
@@ -57,12 +55,13 @@ $tasks = $stmt->fetchAll();
     <?php endif; ?>
 
     <!-- Formulaire pour ajouter une tâche -->
-    <form class="add-task-form" action="add_task.php" method="POST">
-        <input type="hidden" name="list_id" value="<?= $list_id; ?>">
-        <input type="text" name="task_name" placeholder="Nouvelle tâche" required>
-        <input type="color" name="color" value="#ffffff"> <!-- Sélecteur de couleur -->
-        <button type="submit">Ajouter</button>
+    <form method="POST" action="add_task.php">
+        <input type="hidden" name="todo_id" value="<?= $todo_id ?>">
+        <input type="text" name="task_name" required>
+        <input type="color" name="color" value="#ffffff">
+        <button type="submit">Ajouter la tâche</button>
     </form>
+
 </div>
 
 <script>

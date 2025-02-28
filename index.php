@@ -92,7 +92,7 @@ if (isset($_SESSION['user_id'])): ?>
             <ul>
                 <?php foreach ($lists as $list): ?>
                     <li>
-                        <a href="tasks.php?list_id=<?= $list['list_id']; ?>"><?= $list['list_name']; ?></a>
+                        <a href="../sql/task.php?list_id=<?= $list['list_id']; ?>"><?= $list['list_name']; ?></a>
                     </li>
                 <?php endforeach; ?>
             </ul>
