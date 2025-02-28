@@ -23,8 +23,8 @@ $color = "#ffffff";
 $stmt->execute([
     ':user_id' => $_SESSION['user_id'],
     ':list_name' => $title,
-    ':color' => $color
-]);
+    ':color' => $color,
+    ]);
 
 $todo_id = $pdo->lastInsertId(); // ID réel de la liste
 ?>
