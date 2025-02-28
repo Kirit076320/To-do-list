@@ -21,11 +21,10 @@ function loadLists() {
 
             data.forEach(list => {
                 let listHTML = `
-                    <a href="tasks.php?list_id=${list.list_id}" class="text-decoration-none">
-                        <div class="card custom-card" style="border-left: 5px solid ${list.color}; margin-bottom: 15px;">
-                            <div class="card-body custom-card-body">
-                                <h5 class="card-title text-center custom-card-title">${list.list_name}</h5>
-                                <ul class="task-list" id="task-list-${list.list_id}">`;
+                    <div class="card custom-card" style="border-left: 5px solid ${list.color}; margin-bottom: 15px;">
+                        <div class="card-body custom-card-body">
+                            <h5 class="card-title text-center custom-card-title">${list.list_name}</h5>
+                            <ul class="task-list" id="task-list-${list.list_id}">`;
 
                 // Vérifie si la liste a des tâches avant de les afficher
                 if (Array.isArray(list.tasks) && list.tasks.length > 0) {
@@ -41,7 +40,7 @@ function loadLists() {
                     listHTML += `<li>Aucune tâche pour cette liste.</li>`;
                 }
 
-                listHTML += `</ul></div></div></a>`;
+                listHTML += `</ul></div></div>`;
                 container.append(listHTML);
             });
         },
