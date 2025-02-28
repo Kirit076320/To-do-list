@@ -56,11 +56,12 @@ $tasks = $stmt->fetchAll();
 
     <!-- Formulaire pour ajouter une tâche -->
     <form method="POST" action="add_task.php">
-        <input type="hidden" name="todo_id" value="<?= $todo_id ?>">
-        <input type="text" name="task_name" required>
+        <input type="hidden" name="list_id" value="<?= $list_id ?>">
+        <input type="text" name="task_name" placeholder="Nom de la tâche" required>
         <input type="color" name="color" value="#ffffff">
         <button type="submit">Ajouter la tâche</button>
     </form>
+
 
 </div>
 
