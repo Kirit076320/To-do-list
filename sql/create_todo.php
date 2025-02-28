@@ -27,13 +27,15 @@ $stmt->execute([
 ]);
 
 $todo_id = $pdo->lastInsertId(); // ID réel de la liste
+header("Location: ../index.php");
+exit();
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <!-- Meta tags -->
-    <script src="../assets/script.js" defer></script>
+    <script src="../assets/js/script.js" defer></script>
 </head>
 <body>
 <div class='todo-list' data-list-id="<?= $todo_id ?>">

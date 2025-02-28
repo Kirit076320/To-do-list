@@ -7,7 +7,7 @@
         <serverdata>
           <mappings>
             <mapping deploy="\" local="$PROJECT_DIR$" web="/" />
-            <mapping local="$PROJECT_DIR$/../../../../xampp/htdocs" />
+            <mapping deploy="\" local="$PROJECT_DIR$/../../../../xampp/htdocs" web="/" />
           </mappings>
         </serverdata>
       </paths>

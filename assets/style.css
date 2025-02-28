@@ -120,6 +120,18 @@
     margin-bottom: 20px;
 }
 
+.favorite-icon {
+    color: #dc3545; /* Rouge */
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.favorite-icon:hover {
+    color: #ff0000; /* Rouge vif */
+}
+
+
 .custom-card-body {
     padding: 20px;
 }
