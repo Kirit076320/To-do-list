@@ -69,3 +69,17 @@ function addTask(todoId) {
     });
     document.getElementById(`todo-tasks-${todoId}`).appendChild(task);
 }
+function refreshTaskList(listId) {
+    fetch(`get_tasks.php?list_id=${listId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const taskList = document.querySelector(`.task-list[data-list-id="${listId}"]`);
+                if (taskList) {
+                    taskList.innerHTML = data.html;
+                    initDragAndDrop(); // Réinitialisez le drag & drop
+                }
+            }
+        })
+        .catch(error => console.error('Erreur de rafraîchissement:', error));
+}
