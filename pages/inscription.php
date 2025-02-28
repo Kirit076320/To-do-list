@@ -31,6 +31,7 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a href="inscription.php" class="btn btn-inscription" role="button" style="background-color: #DB5A6B;">Inscription</a>
+
                 </li>
                 <li class="nav-item">
                     <a href="connexion.php" class="btn btn-connexion" role="button" style="background-color: #b3bcff;">Connexion</a>
@@ -61,6 +62,7 @@
             <div class="input-box">
                 <input type="email" name="email" id="email" required>
                 <span>Email</span>
+
             </div>
             <div class="input-box">
                 <input type="text" name="username" id="username" required>
