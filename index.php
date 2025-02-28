@@ -65,7 +65,6 @@ if (isset($_SESSION['user_id'])): ?>
             </div>
         </nav>
 
-
         <div class="container-fluid custom-container" style="margin-top: 8rem">
             <div class="row justify-content-center">
                 <div class="col-md-6">
@@ -73,11 +72,6 @@ if (isset($_SESSION['user_id'])): ?>
                 </div>
             </div>
         </div>
-
-        <form action="sql/create_todo.php" method="POST">
-            <input type="text" name="list_name" placeholder="Nom de la liste" required>
-            <button type="submit">Créer</button>
-        </form>
 
         <div class="container-fluid custom-container" style="margin-top: 3rem">
             <div class="row justify-content-center" id="task-container">
