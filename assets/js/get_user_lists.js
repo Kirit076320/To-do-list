@@ -1,5 +1,21 @@
 $(document).ready(function () {
     loadUserLists();
+
+    // Ajout de la recherche en temps réel
+    $("#searchInput").on("input", function () {
+        let filter = $(this).val().toLowerCase();
+
+        $(".custom-card").each(function () {
+            let listName = $(this).attr("data-list-name").toLowerCase();
+            let taskColors = $(this).attr("data-task-colors").toLowerCase();
+
+            if (listName.includes(filter) || taskColors.includes(filter)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
 });
 
 function loadUserLists() {
@@ -24,8 +40,12 @@ function loadUserLists() {
             container.empty(); // Nettoyer avant de recharger les données
 
             data.forEach(list => {
+                let taskColors = [];
+
                 let listHTML = `
-                    <div class="card custom-card" style="margin-bottom: 15px;">
+                    <div class="card custom-card" 
+                         data-list-name="${list.list_name}" 
+                         data-task-colors=""> 
                         <div class="card-body custom-card-body">
                             <h5 class="card-title text-center custom-card-title">
                                 <a href="/sql/task.php?list_id=${list.list_id}" class="text-decoration-none">
@@ -36,11 +56,15 @@ function loadUserLists() {
 
                 if (Array.isArray(list.tasks) && list.tasks.length > 0) {
                     list.tasks.forEach(task => {
+                        if (task.color) {
+                            taskColors.push(task.color); // Stocker la couleur pour l'attribut
+                        }
+
                         listHTML += `
                             <li>
-                                <strong>${task.task_name}</strong> - ${task.status} <br>
-                                <small>${task.description}</small> <br>
-                                <span>Priorité: ${task.priority}, Date limite: ${task.due_date}</span>
+                                <strong style="filter: blur(5px);">${task.task_name}</strong><br>
+                                <small style="filter: blur(5px);">${task.description}</small> <br>
+                                <span style="filter: blur(5px);">Priorité: ${task.priority}, Date limite: ${task.due_date}</span>
                             </li>`;
                     });
                 } else {
@@ -48,7 +72,12 @@ function loadUserLists() {
                 }
 
                 listHTML += `</ul></div></div>`;
-                container.append(listHTML);
+
+                // Ajouter les couleurs au `data-task-colors`
+                let cardElement = $(listHTML);
+                cardElement.attr("data-task-colors", taskColors.join(", "));
+
+                container.append(cardElement);
             });
         },
         error: function (xhr, status, error) {

@@ -27,7 +27,7 @@ if (isset($_SESSION['user_id'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <title>Bootstrap Example</title>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <link rel="stylesheet" href="assets/style.css">
 
@@ -66,16 +66,15 @@ if (isset($_SESSION['user_id'])): ?>
         </nav>
     </div>
 
-        <div class="container-fluid custom-container" style="margin-top: 8rem">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <input type="text" id="searchInput" class="form-control" placeholder="Rechercher par nom ou couleur...">
-                </div>
+    <div class="container-fluid custom-container" style="margin-top: 8rem">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <input type="text" id="searchInput" class="form-control" placeholder="Rechercher par nom ou couleur...">
             </div>
         </div>
+    </div>
 
-
-        <div class="container">
+    <div class="container">
             <div class="row">
                 <div class="col-md-6 d-flex justify-content-md-start justify-content-center">
                     <form action="/sql/create_todo.php" method="POST" class="w-100">

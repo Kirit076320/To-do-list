@@ -27,6 +27,8 @@ $stmt->execute([
 ]);
 
 $todo_id = $pdo->lastInsertId(); // ID réel de la liste
+header("Location: ../index.php");
+exit();
 ?>
 
 <!DOCTYPE html>
