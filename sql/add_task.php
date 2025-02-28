@@ -64,6 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Afficher les tâches existantes
 if (isset($list_id)) {
-    displayTasks($pdo, $tasks_id);
+    displayTasks($pdo, $list_id);
 }
 ?>
