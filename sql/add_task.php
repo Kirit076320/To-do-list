@@ -1,5 +1,10 @@
 <?php
 session_start();
+$pdo = new PDO('mysql:host=localhost;dbname=to-do-list;charset=utf8', 'root', '');
+
+// Afficher le list_id pour le débogage
+echo "List ID récupéré de la session : " . htmlspecialchars($list_id) . "<br>";
+
 require_once(__DIR__ . '/bd.php');
 
 header('Content-Type: application/json');
