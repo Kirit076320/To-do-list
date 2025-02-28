@@ -2,10 +2,10 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Démarrer la session
 session_start();
+$pdo = new PDO('mysql:host=localhost;dbname=to-do-list;charset=utf8', 'root', '');
 
-// Vérifier si list_id est défini dans la session
+//Vérifier si list_id est défini dans la session
 if (!isset($_SESSION['list_id'])) {
     echo "Erreur : list_id n'est pas défini dans la session.";
     exit;

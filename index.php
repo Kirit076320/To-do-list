@@ -1,6 +1,6 @@
 <?php
-session_start();
-$pdo = new PDO('mysql:host=localhost;dbname=to-do-list;charset=utf8', 'root', '');
+    session_start();
+    $pdo = new PDO('mysql:host=localhost;dbname=to-do-list;charset=utf8', 'root', '');
 
 // Vérification si l'utilisateur est connecté
 if (isset($_SESSION['user_id'])) {
@@ -64,11 +64,26 @@ if (isset($_SESSION['user_id'])): ?>
                 </div>
             </div>
         </nav>
+    </div>
 
         <div class="container-fluid custom-container" style="margin-top: 8rem">
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <input type="text" id="searchInput" class="form-control" placeholder="Rechercher par nom ou couleur...">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 d-flex justify-content-md-start justify-content-center">
+                    <form action="/sql/create_todo.php" method="POST" class="w-100">
+                        <div class="input-group">
+                            <input type="text" name="list_name" class="form-control" placeholder="Nom de la liste" required>
+                            <button type="submit" class="btn btn-primary">Créer</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -79,28 +94,6 @@ if (isset($_SESSION['user_id'])): ?>
             </div>
         </div>
 
-        <h1>Vos To-Do Lists</h1>
-
-        <!-- Affichage des To-Do Lists -->
-        <?php if ($lists): ?>
-            <ul>
-                <?php foreach ($lists as $list): ?>
-                    <li>
-                        <a href="../sql/task.php?list_id=<?= $list['list_id']; ?>"><?= $list['list_name']; ?></a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        <?php else: ?>
-            <p>Aucune To-Do List trouvée.</p>
-        <?php endif; ?>
-
-        <!-- Formulaire pour créer une nouvelle To-Do List -->
-        <h2>Créer une nouvelle To-Do List</h2>
-        <form action="../sql/create_todo.php" method="POST">
-            <input type="text" name="list_name" placeholder="Nom de la liste" required>
-            <button type="submit">Créer la liste</button>
-        </form>
-    </div>
 <?php else: ?>
 
     <nav class="navbar navbar-expand-lg" style="background-color: #fcc9b9;">
@@ -145,7 +138,7 @@ if (isset($_SESSION['user_id'])): ?>
 <!-- Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script src="assets/js/get_tasks.js"></script>
+<script src="assets/js/get_user_lists.js"></script>
 
 </body>
 </html>
