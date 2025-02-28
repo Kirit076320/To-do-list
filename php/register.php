@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Vérifier que les mots de passe correspondent
     if ($password !== $password_confirm) {
-        echo "Les mots de passe ne correspondent pas. <a href=\"../php/register.php\">Retour</a>";
+        echo "Les mots de passe ne correspondent pas. <a href=\"../pages/inscription.php\">Retour</a>";
         exit();
     }
 
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt = $pdo->prepare("SELECT user_id FROM users WHERE username = ?");
     $stmt->execute([$username]);
     if ($stmt->fetch()) {
-        echo "Ce nom d'utilisateur est déjà pris. <a href=\"../php/register.php\">Retour</a>";
+        echo "Ce nom d'utilisateur est déjà pris. <a href=\"../pages/inscription.php\">Retour</a>";
         exit();
     }
 
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt = $pdo->prepare("SELECT user_id FROM users WHERE email = ?");
     $stmt->execute([$email]);
     if ($stmt->fetch()) {
-        echo "Cet email est déjà utilisé. <a href=\"../php/register.php\">Retour</a>";
+        echo "Cet email est déjà utilisé. <a href=\"../pages/inscription.php\">Retour</a>";
         exit();
     }
 

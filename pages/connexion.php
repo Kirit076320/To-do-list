@@ -14,7 +14,7 @@
 
 <nav class="navbar navbar-expand-lg" style="background-color: #fcc9b9;">
     <div class="container-fluid">
-        <a class="navbar-brand" href="../index.html">
+        <a class="navbar-brand" href="../index.php">
             <img src="../assets/img/japan_list.png" alt="Logo">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
