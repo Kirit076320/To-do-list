@@ -102,7 +102,7 @@ if (isset($_SESSION['user_id'])): ?>
 
         <!-- Formulaire pour créer une nouvelle To-Do List -->
         <h2>Créer une nouvelle To-Do List</h2>
-        <form action="../assets/create_todo.php" method="POST">
+        <form action="../sql/create_todo.php" method="POST">
             <input type="text" name="list_name" placeholder="Nom de la liste" required>
             <button type="submit">Créer la liste</button>
         </form>
